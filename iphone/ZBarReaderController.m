@@ -22,7 +22,7 @@
 //------------------------------------------------------------------------
 
 #import <ZBarSDK/ZBarReaderController.h>
-#import <ZBarSDK/ZBarHelpController.h>
+//#import <ZBarSDK/ZBarHelpController.h>
 #import "debug.h"
 
 /* the use of UIGetScreenImage() may no longer be sanctioned, even
@@ -168,8 +168,8 @@ CGImageRef UIGetScreenImage(void);
     }
     [infoBtn release];
     infoBtn = nil;
-    [help release];
-    help = nil;
+//    [help release];
+//    help = nil;
 }
 
 - (void) viewDidUnload
@@ -579,35 +579,35 @@ CGImageRef UIGetScreenImage(void);
 
 - (void) showHelpWithReason: (NSString*) reason
 {
-    if(help) {
-        [help.view removeFromSuperview];
-        [help release];
-    }
-    help = [[ZBarHelpController alloc]
-               initWithReason: reason];
-    help.delegate = (id<ZBarHelpDelegate>)self;
-
-    if(self.sourceType != UIImagePickerControllerSourceTypeCamera) {
-        [self presentModalViewController: help
-              animated: YES];
-        return;
-    }
-
-    // show help as overlay view to workaround controller bugs
-    sampling = NO;
-    scanner.enableCache = NO;
-    help.wantsFullScreenLayout = YES;
-    help.view.alpha = 0;
-
-    UIView *activeOverlay = [self cameraOverlayView];
-    help.view.frame = [activeOverlay
-                          convertRect: CGRectMake(0, 0, 320, 480)
-                          fromView: nil];
-    [activeOverlay addSubview: help.view];
-    [UIView beginAnimations: @"ZBarHelp"
-            context: nil];
-    help.view.alpha = 1;
-    [UIView commitAnimations];
+//    if(help) {
+//        [help.view removeFromSuperview];
+//        [help release];
+//    }
+//    help = [[ZBarHelpController alloc]
+//               initWithReason: reason];
+//    help.delegate = (id<ZBarHelpDelegate>)self;
+//
+//    if(self.sourceType != UIImagePickerControllerSourceTypeCamera) {
+//        [self presentModalViewController: help
+//              animated: YES];
+//        return;
+//    }
+//
+//    // show help as overlay view to workaround controller bugs
+//    sampling = NO;
+//    scanner.enableCache = NO;
+//    help.wantsFullScreenLayout = YES;
+//    help.view.alpha = 0;
+//
+//    UIView *activeOverlay = [self cameraOverlayView];
+//    help.view.frame = [activeOverlay
+//                          convertRect: CGRectMake(0, 0, 320, 480)
+//                          fromView: nil];
+//    [activeOverlay addSubview: help.view];
+//    [UIView beginAnimations: @"ZBarHelp"
+//            context: nil];
+//    help.view.alpha = 1;
+//    [UIView commitAnimations];
 }
 
 - (void) info
@@ -683,15 +683,15 @@ CGImageRef UIGetScreenImage(void);
 
 - (void) helpControllerDidFinish: (ZBarHelpController*) hlp
 {
-    if(self.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        [UIView beginAnimations: @"ZBarHelp"
-                context: nil];
-        hlp.view.alpha = 0;
-        [UIView commitAnimations];
-        [self initScanning];
-    }
-    else
-        [hlp dismissModalViewControllerAnimated: YES];
+//    if(self.sourceType == UIImagePickerControllerSourceTypeCamera) {
+//        [UIView beginAnimations: @"ZBarHelp"
+//                context: nil];
+//        hlp.view.alpha = 0;
+//        [UIView commitAnimations];
+//        [self initScanning];
+//    }
+//    else
+//        [hlp dismissModalViewControllerAnimated: YES];
 }
 
 - (id <NSFastEnumeration>) scanImage: (CGImageRef) image
